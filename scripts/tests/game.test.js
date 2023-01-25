@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-const { game, newGame, showScore, addTurn, lightsOn, showTurns } = require("../game");
+const { game, newGame, showScore, addTurn, lightsOn, showTurns, playerTurn } = require("../game");
 
 beforeAll(() => {
     let fs = require("fs");
@@ -89,4 +89,9 @@ describe("gameplay works correctly", () => {
         showTurns();
         expect(game.turnNumber).toBe(0);
     });
+    test("should increment the score if the turn is correct", () => {
+        game.playerMoves.push(game.currentGame[0]);
+        playerTurn();
+        expect(game.score).toBe(1);
+    })
 });
